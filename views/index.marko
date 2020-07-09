@@ -1,0 +1,44 @@
+<!doctype html>
+
+class {
+    handleChange() {
+        // Only emit email-changes if they are valid.
+        this.emit("email-change", { email: $('#emailid') });
+        $.post("/login",function(data){
+            if(data==='done') {
+                window.location.href="/admin";
+            }
+        });
+    }
+  }
+<html>
+<head>
+<title>Home</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var email,pass;
+    $("#submit").click(function(){
+        email=$("#email").val();
+        pass=$("#password").val();
+        // this.emit("email-change", { email: email });
+        /*
+        * Perform some validation here.
+        */
+        $.post("/login",{email:email,pass:pass},function(data){
+            if(data==='done') {
+                window.location.href="/admin";
+            }
+        });
+    });
+});
+</script>
+</head>
+<body>
+<!-- <input type="text" size="40" placeholder="Type your email" id="email"><br /> -->
+<input id="email" type="email" name=input.name />
+<input type="password" size="40" placeholder="Type your password" id="password"><br />
+<span>${input.myString}</span>
+<input type="button" value="Submit" id="submit" onclick("handleChange")>
+</body>
+</html>
