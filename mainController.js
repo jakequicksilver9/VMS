@@ -1,4 +1,5 @@
 
+const user = require("./pojos/user");
 const mainController = (router, views) => {
     //define routes
     var index = require(views + 'index')
@@ -7,7 +8,7 @@ const mainController = (router, views) => {
     //controllers
     router.get('/',(request,response) => {
         let sess = request.session
-        if(sess.email) {
+        if(sess.user) {
             return response.redirect('/admin')
         }
         var test = "test123"
@@ -15,14 +16,14 @@ const mainController = (router, views) => {
     })
 
     router.post('/login',(request,response) => {
-        request.session.email = request.body.email
+        request.session.user = new user.User(request.body.email, request.body.pass)
         response.end('done') 
     })
 
     router.get('/admin',(request,response) => {
         
-        if(request.session.email) {
-            var greeting = "Hello " + request.session.email
+        if(request.session.user) {
+            var greeting = "Hello " + request.session.user.email
             response.marko(manageVolunteers, { greeting: greeting })
         }
         else {
