@@ -14,7 +14,7 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js></script><script>\n            $(document).ready(function(){\n                $.ajax({\n                    url: '/admin',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n            });\n            </script></head><body><h1 id=header>" +
+  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                $.ajax({\n                    url: '/admin',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n            });\n            </script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
     "</h1>");
 

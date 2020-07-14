@@ -1,17 +1,23 @@
-require("marko/node-require");
+const mainController = require("./mainController")
+
+require("marko/node-require")
 const express = require('express')
-const markoExpress = require("marko/express");
+const markoExpress = require("marko/express")
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const redis = require('redis')
 const redisStore = require('connect-redis')(session)
 const client  = redis.createClient()
-const router = express.Router()
 const app = express()
-app.set('views', __dirname + '/views');
-app.use(markoExpress());
-app.use(bodyParser.urlencoded())
+const views = __dirname + '/views/'
+
+app.set('views', __dirname + '/views')
+
+app.use(markoExpress())
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
 app.use(session({
     secret: 'ssshhhhh',
     // create new redis store.
@@ -19,47 +25,11 @@ app.use(session({
     saveUninitialized: false,
     resave: false
 }))
+app.use('/js', [
+    express.static(__dirname + '/node_modules/jquery/dist/'),
+])
 
-const views = __dirname + '/views/'
-//define routes
-var index = require(views + 'index')
-var manageVolunteers = require(views + 'manageVolunteers')
-
-router.get('/',(req,res) => {
-    let sess = req.session
-    if(sess.email) {
-        return res.redirect('/admin')
-    }
-    var test = "test123"
-    res.marko(index, {myString: "test123"})
-})
-
-router.post('/login',(req,res) => {
-    req.session.email = req.body.email
-    res.end('done') 
-})
-
-router.get('/admin',(req,res) => {
-    
-    if(req.session.email) {
-        var greeting = "Hello " + req.session.email
-        res.marko(manageVolunteers, { greeting: greeting })
-    }
-    else {
-        res.write('<h1>Please login first.</h1>')
-        res.end('<a href='+'/'+'>Login</a>')
-    }
-})
-
-router.get('/logout',(req,res) => {
-    req.session.destroy((err) => {
-        if(err) {
-            return console.log(err)
-        }
-        res.redirect('/')
-    })
-
-})
+const router = mainController.mainController(express.Router(), views)
 
 app.use('/', router)
 
