@@ -4,6 +4,8 @@ const mainController = (router, views) => {
     //define routes
     var index = require(views + 'index')
     var manageVolunteers = require(views + 'manageVolunteers')
+    var manageOpportunities = require(views + 'manageOpportunities')
+    var manageWhat = require(views + 'manageWhat')
 
     //controllers
     router.get('/',(request,response) => {
@@ -24,12 +26,36 @@ const mainController = (router, views) => {
         
         if(request.session.user) {
             var greeting = "Hello " + request.session.user.email
+            response.marko(manageWhat, { greeting: greeting })
+        }
+        else {
+            response.write('<h1>Please login first.</h1>')
+            response.end('<a href='+'/'+'>Login</a>')
+        }
+    })
+
+    router.get('/manageVolunteers',(request,response) => {
+        if(request.session.user) {
+            var greeting = "Hello " + request.session.user.email
             response.marko(manageVolunteers, { greeting: greeting })
         }
         else {
             response.write('<h1>Please login first.</h1>')
             response.end('<a href='+'/'+'>Login</a>')
         }
+        
+    })
+
+    router.get('/manageOpportunities',(request,response) => {
+        if(request.session.user) {
+            var greeting = "Hello " + request.session.user.email
+            response.marko(manageOpportunities, { greeting: greeting })
+        }
+        else {
+            response.write('<h1>Please login first.</h1>')
+            response.end('<a href='+'/'+'>Login</a>')
+        }
+        
     })
 
     router.get('/logout',(request,response) => {

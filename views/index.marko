@@ -20,14 +20,25 @@ class {
         <script src="/js/jquery.js"></script>
         <script>
         $(document).ready(function(){
+            $.ajax({
+                    url: '/index',
+                    complete: function(data) {
+                      console.log(data);
+                    }
+                  });
+
+
             var email,pass
             $("#submit").click(function(){
                 email=$("#email").val()
                 pass=$("#password").val()
                 
                 $.post("/login",{email:email,pass:pass},function(data){
-                    if(data==='done') {
+                    if(data==='done' && email !='' && pass !='') {
                         window.location.href="/admin"
+                    }
+                    else{
+                        alert("Please input Username & Password.")
                     }
                 })
             })
@@ -37,7 +48,8 @@ class {
     <body>
         <input id="email" type="email" name=input.name />
         <input type="password" size="40" placeholder="Type your password" id="password"><br />
+
         <span>${input.myString}</span>
-        <input type="button" value="Submit" id="submit" onclick("handleChange")>
+        <input type="submit" value="Submit" id="submit" onclick("handleChange")>
     </body>
 </html>

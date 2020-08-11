@@ -28,11 +28,11 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!doctype html><html><head><title>Home</title><h1>Volunteer Managment System</h1><h2>Managment of Volunteers</h2><script src=/js/jquery.js></script><script>\r\n        $(document).ready(function(){\r\n            var email,pass\r\n            $(\"#submit\").click(function(){\r\n                email=$(\"#email\").val()\r\n                pass=$(\"#password\").val()\r\n                \r\n                $.post(\"/login\",{email:email,pass:pass},function(data){\r\n                    if(data==='done') {\r\n                        window.location.href=\"/admin\"\r\n                    }\r\n                })\r\n            })\r\n        })\r\n        </script></head><body><input id=email type=email" +
+  out.w("<!doctype html><html><head><title>Home</title><h1>Volunteer Managment System</h1><h2>Managment of Volunteers</h2><script src=/js/jquery.js></script><script>\r\n        $(document).ready(function(){\r\n            $.ajax({\r\n                    url: '/index',\r\n                    complete: function(data) {\r\n                      console.log(data);\r\n                    }\r\n                  });\r\n\r\n\r\n            var email,pass\r\n            $(\"#submit\").click(function(){\r\n                email=$(\"#email\").val()\r\n                pass=$(\"#password\").val()\r\n                \r\n                $.post(\"/login\",{email:email,pass:pass},function(data){\r\n                    if(data==='done' && email !='' && pass !='') {\r\n                        window.location.href=\"/admin\"\r\n                    }\r\n                    else{\r\n                        alert(\"Please input Username & Password.\")\r\n                    }\r\n                })\r\n            })\r\n        })\r\n        </script></head><body><input id=email type=email" +
     marko_attr("name", input.name) +
     "><input type=password size=40 placeholder=\"Type your password\" id=password><br><span>" +
     marko_escapeXml(input.myString) +
-    "</span><input type=button value=Submit id=submit onclick(\"handleChange\")>");
+    "</span><input type=submit value=Submit id=submit onclick(\"handleChange\")>");
 
   init_components_tag({}, out);
 
