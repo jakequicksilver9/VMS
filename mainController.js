@@ -3,9 +3,10 @@ const user = require("./pojos/user");
 const mainController = (router, views) => {
     //define routes
     var index = require(views + 'index')
-    var manageVolunteers = require(views + 'manageVolunteers')
-    var manageOpportunities = require(views + 'manageOpportunities')
     var manageWhat = require(views + 'manageWhat')
+    var manageVolunteers = require(views + 'manageVolunteers')
+    var addVolunteer = require(views + 'addVolunteer')
+    var manageOpportunities = require(views + 'manageOpportunities')
 
     //controllers
     router.get('/',(request,response) => {
@@ -38,6 +39,18 @@ const mainController = (router, views) => {
         if(request.session.user) {
             var greeting = "Hello " + request.session.user.email
             response.marko(manageVolunteers, { greeting: greeting })
+        }
+        else {
+            response.write('<h1>Please login first.</h1>')
+            response.end('<a href='+'/'+'>Login</a>')
+        }
+        
+    })
+
+    router.get('/addVolunteer',(request,response) => {
+        if(request.session.user) {
+            var greeting = "Hello " + request.session.user.email
+            response.marko(addVolunteer, { greeting: greeting })
         }
         else {
             response.write('<h1>Please login first.</h1>')

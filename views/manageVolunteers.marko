@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <title>Manage Volunteers</title>
@@ -14,9 +12,8 @@
                     }
                   });
                 
-                
-              var email,pass
-              $("#logOut").click(function(){
+                var email,pass
+                $("#logOut").click(function(){
                   email="";
                   pass="";
                   
@@ -25,17 +22,19 @@
                           window.location.href="/logout"
                       }
                   })
-              })
-            });
+                })
+            
+                $("#addVolunteer").click(function() {
+                window.location.href="/addVolunteer"
+                })
 
-            </script>
+            });
+        </script>
     </head>
     <body>
         <h1>${input.greeting}</h1>
         <h1>Volunteers to manage</h1>
-
-        <input type="button" value="log out" id="logOut" onclick("logOut")>
-
-
+        <input type="button" value="Add Volunteer" id="addVolunteer">
+        <input type="button" value="log out" id="logOut">
     </body>
 </html>
