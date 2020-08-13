@@ -14,13 +14,13 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Opportunities</title><script src=/js/jquery.js></script><script>\r\n            $(document).ready(function(){\r\n                $.ajax({\r\n                    url: '/manageOpportunities',\r\n                    complete: function(data) {\r\n                      console.log(data);\r\n                    }\r\n                  });\r\n                \r\n                \r\n              var email,pass\r\n              $(\"#logOut\").click(function(){\r\n                  email=\"\";\r\n                  pass=\"\";\r\n                  \r\n                  $.post(\"/login\",{email:email,pass:pass},function(data){\r\n                      if(data==='done') {\r\n                          window.location.href=\"/logout\"\r\n                      }\r\n                  })\r\n              })\r\n            });\r\n\r\n            </script></head><body><h1>" +
+  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Opportunities</title><script src=/js/jquery.js></script><script>\r\n            $(document).ready(function(){\r\n                $.ajax({\r\n                    url: '/manageOpportunities',\r\n                    complete: function(data) {\r\n                      console.log(data);\r\n                    }\r\n                });\r\n                \r\n                \r\n            var email,pass\r\n            $(\"#logOut\").click(function(){\r\n                  email=\"\";\r\n                  pass=\"\";\r\n                  \r\n                  $.post(\"/login\",{email:email,pass:pass},function(data){\r\n                      if(data==='done') {\r\n                          window.location.href=\"/logout\"\r\n                      }\r\n                  })\r\n            })\r\n\r\n            $(\"#addOpportunity\").click(function() {\r\n                window.location.href=\"/addOpportunity\"\r\n            })\r\n\r\n\r\n            });\r\n\r\n            </script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
-    "</h1><h1>Opportunities to manage</h1><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
+    "</h1><h1>Opportunities to manage</h1><input type=button value=\"Add Opportunity\" id=addOpportunity><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "7");
+  await_reorderer_tag({}, out, __component, "8");
 
   _preferred_script_location_tag({}, out);
 

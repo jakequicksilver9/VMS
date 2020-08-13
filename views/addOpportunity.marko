@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <title>Add Opportunitys</title>
+        <script src="/js/jquery.js"></script>
+        <script>
+            $(document).ready(function(){
+                $.ajax({
+                    url: '/addOpportunity',
+                    complete: function(data) {
+                      console.log(data);
+                    }
+                  });
+                
+                
+              var email,pass
+              $("#logOut").click(function(){
+                  email="";
+                  pass="";
+                  
+                  $.post("/login",{email:email,pass:pass},function(data){
+                      if(data==='done') {
+                          window.location.href="/logout"
+                      }
+                  })
+              })
+            });
+
+            </script>
+    </head>
+    <body>
+        <h1>${input.greeting}</h1>
+        <h1>Opportunitys to add</h1>
+
+        <input type="button" value="log out" id="logOut" onclick("logOut")>
+
+    </body>
+</html>

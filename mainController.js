@@ -7,6 +7,8 @@ const mainController = (router, views) => {
     var manageVolunteers = require(views + 'manageVolunteers')
     var addVolunteer = require(views + 'addVolunteer')
     var manageOpportunities = require(views + 'manageOpportunities')
+    var addOpportunity = require(views + 'addOpportunity')
+
 
     //controllers
     router.get('/',(request,response) => {
@@ -63,6 +65,16 @@ const mainController = (router, views) => {
         if(request.session.user) {
             var greeting = "Hello " + request.session.user.email
             response.marko(manageOpportunities, { greeting: greeting })
+        }
+        else {
+            response.write('<h1>Please login first.</h1>')
+            response.end('<a href='+'/'+'>Login</a>')
+        }
+    })
+    router.get('/addOpportunity',(request,response) => {
+        if(request.session.user) {
+            var greeting = "Hello " + request.session.user.email
+            response.marko(addOpportunity, { greeting: greeting })
         }
         else {
             response.write('<h1>Please login first.</h1>')

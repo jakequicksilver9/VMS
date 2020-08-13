@@ -12,11 +12,11 @@
                     complete: function(data) {
                       console.log(data);
                     }
-                  });
+                });
                 
                 
-              var email,pass
-              $("#logOut").click(function(){
+            var email,pass
+            $("#logOut").click(function(){
                   email="";
                   pass="";
                   
@@ -25,7 +25,13 @@
                           window.location.href="/logout"
                       }
                   })
-              })
+            })
+
+            $("#addOpportunity").click(function() {
+                window.location.href="/addOpportunity"
+            })
+
+
             });
 
             </script>
@@ -34,6 +40,7 @@
         <h1>${input.greeting}</h1>
         <h1>Opportunities to manage</h1>
 
+        <input type="button" value="Add Opportunity" id="addOpportunity">
         <input type="button" value="log out" id="logOut" onclick("logOut")>
 
 
