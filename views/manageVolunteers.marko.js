@@ -14,9 +14,9 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                // $.ajax({\n                    url: '/manageVolunteers',\n                      console.log(data);\n                //   });\n            });\n            </script></head><body><h1>Manage Volunteers</h1><h1>" +
+  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                $.ajax({\n                    url: '/manageVolunteers',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n                \n                \n              var email,pass\n              $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n              })\n            });\n\n            </script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
-    "</h1><h1>Volunteers to manage</h1>");
+    "</h1><h1>Volunteers to manage</h1><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
 
   init_components_tag({}, out);
 

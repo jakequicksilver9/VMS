@@ -1,21 +1,41 @@
 <!DOCTYPE html>
+
+
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <title>Manage Volunteers</title>
         <script src="/js/jquery.js"></script>
         <script>
             $(document).ready(function(){
-                // $.ajax({
+                $.ajax({
                     url: '/manageVolunteers',
+                    complete: function(data) {
                       console.log(data);
-                //   });
+                    }
+                  });
+                
+                
+              var email,pass
+              $("#logOut").click(function(){
+                  email="";
+                  pass="";
+                  
+                  $.post("/login",{email:email,pass:pass},function(data){
+                      if(data==='done') {
+                          window.location.href="/logout"
+                      }
+                  })
+              })
             });
+
             </script>
     </head>
     <body>
-        <h1>Manage Volunteers</h1>
-        
         <h1>${input.greeting}</h1>
         <h1>Volunteers to manage</h1>
+
+        <input type="button" value="log out" id="logOut" onclick("logOut")>
+
+
     </body>
 </html>

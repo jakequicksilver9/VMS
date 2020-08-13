@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-
-
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
-        <title>Manage Volunteers</title>
+        <title>Manage What</title>
         <script src="/js/jquery.js"></script>
         <script>
             $(document).ready(function(){
@@ -34,8 +32,6 @@
                       }
                   })
               })
-
-
             });
 
             </script>
@@ -44,8 +40,8 @@
         <h1>${input.greeting}</h1>
         <h1>What would you like to manage</h1>
 
-        <a id = "manageVolunteers">Manage Volunteers</a>
-        <a id = "manageOpportunities">Manage Opportunities</a>
+        <button id = "manageVolunteers">Manage Volunteers</button><br><br>
+        <button id = "manageOpportunities">Manage Opportunities</button><br><br>
 
         <input type="button" value="log out" id="logOut" onclick("logOut")>
 

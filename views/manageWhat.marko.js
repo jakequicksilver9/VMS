@@ -14,13 +14,13 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                $.ajax({\n                    url: '/admin',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n\n                $(\"#manageVolunteers\").click(function(){\n                  window.location.href=\"/manageVolunteers\"\n                });\n\n                $(\"#manageOpportunities\").click(function(){\n                  window.location.href=\"/manageOpportunities\"\n                });\n                \n                \n              var email,pass\n              $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n              })\n\n\n            });\n\n            </script></head><body><h1>" +
+  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage What</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                $.ajax({\n                    url: '/admin',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n\n                $(\"#manageVolunteers\").click(function(){\n                  window.location.href=\"/manageVolunteers\"\n                });\n\n                $(\"#manageOpportunities\").click(function(){\n                  window.location.href=\"/manageOpportunities\"\n                });\n                \n                \n              var email,pass\n              $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n              })\n            });\n\n            </script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
-    "</h1><h1>What would you like to manage</h1><a id=manageVolunteers>Manage Volunteers</a><a id=manageOpportunities>Manage Opportunities</a><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
+    "</h1><h1>What would you like to manage</h1><button id=manageVolunteers>Manage Volunteers</button><br><br><button id=manageOpportunities>Manage Opportunities</button><br><br><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "9");
+  await_reorderer_tag({}, out, __component, "13");
 
   _preferred_script_location_tag({}, out);
 
