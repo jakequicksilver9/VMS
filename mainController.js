@@ -1,5 +1,5 @@
 
-const user = require("./pojos/user");
+const user = require("./classes/user");
 const mainController = (router, views) => {
     //define routes
     var index = require(views + 'index')
