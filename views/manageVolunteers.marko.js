@@ -14,13 +14,13 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                $.ajax({\n                    url: '/manageVolunteers',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n                \n                var email,pass\n                $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n                })\n            \n                $(\"#addVolunteer\").click(function() {\n                window.location.href=\"/addVolunteer\"\n                })\n\n            });\n        </script></head><body><h1>" +
+  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                $.ajax({\n                    url: '/manageVolunteers',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n                \n                var email,pass\n                $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n                })\n            \n                $(\"#addVolunteer\").click(function() {\n                window.location.href=\"/addVolunteer\"\n                })\n\n                $(\"#manage\").click(function() {\n                window.location.href=\"/admin\"\n                })\n\n            });\n        </script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
-    "</h1><h1>Volunteers to manage</h1><input type=button value=\"Add Volunteer\" id=addVolunteer><input type=button value=\"log out\" id=logOut>");
+    "</h1><h1>Volunteers to manage</h1><input type=button value=\"Add Volunteer\" id=addVolunteer><input type=button value=Manage id=manage><input type=button value=\"log out\" id=logOut>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "8");
+  await_reorderer_tag({}, out, __component, "9");
 
   _preferred_script_location_tag({}, out);
 

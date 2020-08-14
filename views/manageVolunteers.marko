@@ -28,6 +28,10 @@
                 window.location.href="/addVolunteer"
                 })
 
+                $("#manage").click(function() {
+                window.location.href="/admin"
+                })
+
             });
         </script>
     </head>
@@ -35,6 +39,7 @@
         <h1>${input.greeting}</h1>
         <h1>Volunteers to manage</h1>
         <input type="button" value="Add Volunteer" id="addVolunteer">
+        <input type="button" value="Manage" id="manage">
         <input type="button" value="log out" id="logOut">
     </body>
 </html>

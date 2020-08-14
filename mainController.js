@@ -61,6 +61,8 @@ const mainController = (router, views) => {
         
     })
 
+
+
     router.get('/manageOpportunities',(request,response) => {
         if(request.session.user) {
             var greeting = "Hello " + request.session.user.email

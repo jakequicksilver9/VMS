@@ -31,7 +31,10 @@
                 window.location.href="/addOpportunity"
             })
 
-
+            $("#manage").click(function() {
+                window.location.href="/admin"
+                })
+                
             });
 
             </script>
@@ -41,6 +44,7 @@
         <h1>Opportunities to manage</h1>
 
         <input type="button" value="Add Opportunity" id="addOpportunity">
+        <input type="button" value="Manage" id="manage">
         <input type="button" value="log out" id="logOut" onclick("logOut")>
 
 

@@ -26,6 +26,11 @@
                       }
                   })
               })
+
+              $("#cancel").click(function() {
+                window.location.href="/manageOpportunities"
+                })
+
             });
 
             </script>
@@ -34,6 +39,15 @@
         <h1>${input.greeting}</h1>
         <h1>Opportunitys to add</h1>
 
+        <form action="">
+            <label for="first">First name:</label>
+            <input type="text" id="first" name="firstName"><br><br>
+            
+                
+            <input type="submit" value="Submit">
+        </form>
+
+        <input type="button" value="Cancel" id="cancel">
         <input type="button" value="log out" id="logOut" onclick("logOut")>
 
     </body>

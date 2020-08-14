@@ -16,11 +16,11 @@ function render(input, out, __component, component, state) {
 
   out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage What</title><script src=/js/jquery.js></script><script>\r\n            $(document).ready(function(){\r\n                $.ajax({\r\n                    url: '/admin',\r\n                    complete: function(data) {\r\n                      console.log(data);\r\n                    }\r\n                  });\r\n\r\n                $(\"#manageVolunteers\").click(function(){\r\n                  window.location.href=\"/manageVolunteers\"\r\n                });\r\n\r\n                $(\"#manageOpportunities\").click(function(){\r\n                  window.location.href=\"/manageOpportunities\"\r\n                });\r\n                \r\n                \r\n              var email,pass\r\n              $(\"#logOut\").click(function(){\r\n                  email=\"\";\r\n                  pass=\"\";\r\n                  \r\n                  $.post(\"/login\",{email:email,pass:pass},function(data){\r\n                      if(data==='done') {\r\n                          window.location.href=\"/logout\"\r\n                      }\r\n                  })\r\n              })\r\n            });\r\n\r\n            </script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
-    "</h1><h1>What would you like to manage</h1><button id=manageVolunteers>Manage Volunteers</button><br><br><button id=manageOpportunities>Manage Opportunities</button><br><br><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
+    "</h1><h1>What would you like to manage</h1><button id=manageVolunteers>Manage Volunteers</button><button id=manageOpportunities>Manage Opportunities</button><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "13");
+  await_reorderer_tag({}, out, __component, "9");
 
   _preferred_script_location_tag({}, out);
 
