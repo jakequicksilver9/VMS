@@ -1,5 +1,7 @@
-
+const database = require("./database.js")
 const user = require("./classes/user");
+const volunteer = require("./classes/volunteer");
+
 const mainController = (router, views) => {
     //define routes
     var index = require(views + 'index')
@@ -59,6 +61,12 @@ const mainController = (router, views) => {
             response.end('<a href='+'/'+'>Login</a>')
         }
         
+    })
+
+    router.post('/addVolunteer',(request,response) => {
+        volunteerObj = new volunteer.Volunteer('joe', 'dirt', 'joedirt69', 'password', [1,5,4], 'whoopin ass', '9-5 babty', '112 my address', '904111222333', 'joeDirt@comcast.net', 'educat', 'lisc', 'bobby bob','904333222111', 'emerg@email', 'emerg address', 'true', 'true')
+        database.addVolunteer(volunteerObj)
+        response.end('done') 
     })
 
     router.get('/manageOpportunities',(request,response) => {

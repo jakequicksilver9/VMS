@@ -19,6 +19,28 @@ class Volunteer {
       this.dlfile = dlfile;
       this.ssfile = ssfile;
     }
+    valuesOnly(){
+       
+      var returnStr = '\'' + this.firstname + '\',' +
+      '\'' + this.lastname + '\',' +
+      '\'' + this.username + '\',' +
+      '\'' + this.password + '\',' +
+      '\'{' + this.centers + '}\',' +
+      '\'' + this.skills + '\',' +
+      '\'' + this.availablilty + '\',' +
+      '\'' + this.address + '\',' +
+      '\'' + this.phone + '\',' +
+      '\'' + this.email + '\',' +
+      '\'' + this.education + '\',' +
+      '\'' + this.licenses + '\',' +
+      '\'' + this.emergencyname + '\',' +
+      '\'' + this.emergencyphone + '\',' +
+      '\'' + this.emergencyemail + '\',' +
+      '\'' + this.emergencyaddress + '\',' +
+      '\'' + this.dlfile + '\',' +
+      '\'' + this.ssfile + '\'';
+      return returnStr;
+    }
 }
 
 module.exports.Volunteer = Volunteer;

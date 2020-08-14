@@ -8,13 +8,6 @@ const pool = new Pool({
   port: "5432"
 })
 
-pool.query(
-  "CREATE TABLE volunteer(id SERIAL PRIMARY KEY, firstname TEXT, lastname TEXT, username TEXT NOT NULL, password VARCHAR(50) NOT NULL, centers int[], skills VARCHAR(255), availability VARCHAR(255), address VARCHAR(255), phone VARCHAR(50), email VARCHAR(50), education VARCHAR(255),  licenses VARCHAR(255),  emergencyname TEXT, emergencyphone VARCHAR(50), emergencyemail VARCHAR(50), emergencyaddress VARCHAR(255), dlfile BOOLEAN, ssfile BOOLEAN);",
-  (err, res) => {
-    console.log(err, res);
-    pool.end();
-  }
-)
 
 // function addVolunteer(firstname, lastname, username, password, centers, skills, availablilty, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile){
 
@@ -32,26 +25,25 @@ pool.query(
 //     }
 //   )
 // }
-
+// const addVolunteer = (volunteer) => {
 function addVolunteer(volunteer){
-  var valuesArray = volunteer.map()
-  console.log(valuesArray.join(','))
-  // var queryString = `INSERT INTO volunteer(
-  //   firstname, lastname, username, password, centers, skills, availablilty, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile
-  //   ) VALUES(`
-  //     firstname
-  //   `)`
+  // var valuesArray = volunteer.valuesOnly()
+  console.log(volunteer.valuesOnly())
+  var valuesString = volunteer.valuesOnly()
 
-  // pool.query(
-  //   queryString,
-  //   (err, res) => {
-  //     console.log(err, res);
-  //     pool.end();
-  //   }
-  // )
+  var queryString = `INSERT INTO volunteer(
+    firstname, lastname, username, password, centers, skills, availability, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile
+    ) VALUES(` +valuesString+ `)`;
+console.log(queryString)
+  pool.query(
+    queryString,
+    (err, res) => {
+      console.log(err, res);
+    }
+  )
 }
 
-
+module.exports = {addVolunteer}
 
 // pool.query(
 //   "INSERT INTO student(firstname, lastname, age, address, email)VALUES('Mary Ann', 'Wilters', 20, '74 S Westgate St', 'mroyster@royster.com')",
@@ -62,14 +54,14 @@ function addVolunteer(volunteer){
 // );
 
 // create a string object for Postgres SQL statement
-var queryString = `INSERT INTO some_table(
-id, str, int, bool
-) VALUES(
-'f73664b6ed53493eaffcc8ca68a41fda',
-'this is a string value',
-7777333,
-true
-)`;
+// var queryString = `INSERT INTO some_table(
+// id, str, int, bool
+// ) VALUES(
+// 'f73664b6ed53493eaffcc8ca68a41fda',
+// 'this is a string value',
+// 7777333,
+// true
+// )`;
 
 // pool.query(queryString, (err, res) => {
 //   if (err !== undefined) {
