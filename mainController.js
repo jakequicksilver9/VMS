@@ -61,7 +61,11 @@ const mainController = (router, views) => {
         
     })
 
-
+    router.post('/addVolunteer',(request,response) => {
+        volunteerObj = new volunteer.Volunteer('joe', 'dirt', 'joedirt69', 'password', [1,5,4], 'whoopin ass', '9-5 babty', '112 my address', '904111222333', 'joeDirt@comcast.net', 'educat', 'lisc', 'bobby bob','904333222111', 'emerg@email', 'emerg address', 'true', 'true')
+        database.addVolunteer(volunteerObj)
+        response.end('done') 
+    })
 
     router.get('/manageOpportunities',(request,response) => {
         if(request.session.user) {
