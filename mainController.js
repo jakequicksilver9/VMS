@@ -1,6 +1,7 @@
 const volunteer = require("./classes/volunteer")
 const database = require("./db/database")
 const user = require("./classes/user");
+const { pool } = require("./db/database");
 
 const mainController = (router, views) => {
     //define routes
@@ -49,6 +50,7 @@ const mainController = (router, views) => {
                     text: queryString,
                     rowMode: 'array',
                 })
+                client.release()
                 var greeting = "Hello " + request.session.user.email
                 response.marko(manageVolunteers, { greeting: greeting , volunteers: JSON.stringify(result.rows)})
             }
@@ -75,14 +77,19 @@ const mainController = (router, views) => {
 
     router.post('/addVolunteer',(request,response) => {
         volunteerObj = new volunteer.Volunteer(request.body.firstname, request.body.lastname, request.body.username, request.body.password, request.body.centers, request.body.skills, request.body.availability, request.body.address, request.body.phone, request.body.email, request.body.education, request.body.licenses, request.body.emergencyname,request.body.emergencyphone, request.body.emergencyemail, request.body.emergencyaddress, request.body.dlfile, request.body.ssfile, request.body.approval)
-        database.addVolunteer(volunteerObj)
-        
+        async function runme() {
+            await database.addVolunteer(volunteerObj)
+        }
+        runme()
         response.redirect('/manageVolunteers')
         // response.end('done') 
     })
 
     router.post('/deleteVolunteer',(request,response) => {
-        database.deleteVolunteer(request.body.id)
+        async function runme() {
+            await database.deleteVolunteer(request.body.id)
+        }
+        runme()
         response.end('done') 
     })
 
