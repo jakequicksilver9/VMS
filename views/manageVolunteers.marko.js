@@ -16,16 +16,14 @@ function render(input, out, __component, component, state) {
   var data = input;
 
   out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Manage Volunteers</title><script src=/js/jquery.js></script><script>" +
-    marko_escapeScript(("\n            $(document).ready(function(){\n\n                var volunteers = " + input.volunteers) + "\n                debugger\n\n                $.ajax({\n                    url: '/manageVolunteers',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n                \n                var email,pass\n                $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n                })\n            \n                $(\"#addVolunteer\").click(function() {\n                window.location.href=\"/addVolunteer\"\n                })\n\n                $(\"#manage\").click(function() {\n                window.location.href=\"/admin\"\n                })\n\n            });\n        ") +
-    "</script></head><body><h1> " +
-    marko_escapeXml(input.volunteers) +
-    " </h1><h1>" +
+    marko_escapeScript(("\n            $(document).ready(function(){\n\n                var volunteers = " + input.volunteers) + "\n                var tableData = ''\n                for (var x = 0; x < volunteers.length; x++){\n                    $(\"#tableBody\").append('<tr> <td>' + volunteers[x][0] + '</td> <td>' + volunteers[x][1] + '</td> <td>' + volunteers[x][2] + '</td> <td>' + volunteers[x][3] + '</td> </tr>')\n                }\n                \n                $.ajax({\n                    url: '/manageVolunteers',\n                    complete: function(data) {\n                      console.log(data);\n                    }\n                  });\n                \n                var email,pass\n                $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n                })\n            \n                $(\"#addVolunteer\").click(function() {\n                window.location.href=\"/addVolunteer\"\n                })\n\n                $(\"#manage\").click(function() {\n                window.location.href=\"/admin\"\n                })\n\n            });\n        ") +
+    "</script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
-    "</h1><h1>Volunteers to manage</h1><input type=button value=\"Add Volunteer\" id=addVolunteer><input type=button value=Manage id=manage><input type=button value=\"log out\" id=logOut>");
+    "</h1><h1>Volunteers to manage</h1><table><thead><th>id</th><th>first name</th><th>last name</th><th>user name</th></thead><tbody id=tableBody></tbody></table><input type=button value=\"Add Volunteer\" id=addVolunteer><input type=button value=Manage id=manage><input type=button value=\"log out\" id=logOut>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "10");
+  await_reorderer_tag({}, out, __component, "16");
 
   _preferred_script_location_tag({}, out);
 

@@ -7,8 +7,11 @@
             $(document).ready(function(){
 
                 var volunteers = ${input.volunteers}
-                debugger
-
+                var tableData = ''
+                for (var x = 0; x < volunteers.length; x++){
+                    $("#tableBody").append('<tr> <td>' + volunteers[x][0] + '</td> <td>' + volunteers[x][1] + '</td> <td>' + volunteers[x][2] + '</td> <td>' + volunteers[x][3] + '</td> </tr>')
+                }
+                
                 $.ajax({
                     url: '/manageVolunteers',
                     complete: function(data) {
@@ -41,9 +44,19 @@
     </head>
     <body>
         
-        <h1> ${input.volunteers} </h1>
         <h1>${input.greeting}</h1>
         <h1>Volunteers to manage</h1>
+        <table>
+            <thead>
+                <th>id</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>user name</th>
+            </thead>
+            <tbody id="tableBody">
+            
+            </tbody>
+        </table>
         <input type="button" value="Add Volunteer" id="addVolunteer">
         <input type="button" value="Manage" id="manage">
         <input type="button" value="log out" id="logOut">

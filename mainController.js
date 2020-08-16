@@ -50,7 +50,7 @@ const mainController = (router, views) => {
                     rowMode: 'array',
                 })
                 var greeting = "Hello " + request.session.user.email
-                response.marko(manageVolunteers, { greeting: greeting , volunteers: result.rows})
+                response.marko(manageVolunteers, { greeting: greeting , volunteers: JSON.stringify(result.rows)})
             }
             runme()
         }
