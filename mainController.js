@@ -76,7 +76,9 @@ const mainController = (router, views) => {
     router.post('/addVolunteer',(request,response) => {
         volunteerObj = new volunteer.Volunteer(request.body.firstname, request.body.lastname, request.body.username, request.body.password, request.body.centers, request.body.skills, request.body.availability, request.body.address, request.body.phone, request.body.email, request.body.education, request.body.licenses, request.body.emergencyname,request.body.emergencyphone, request.body.emergencyemail, request.body.emergencyaddress, request.body.dlfile, request.body.ssfile, request.body.approval)
         database.addVolunteer(volunteerObj)
-        response.end('done') 
+        
+        response.redirect('/manageVolunteers')
+        // response.end('done') 
     })
 
     router.post('/deleteVolunteer',(request,response) => {

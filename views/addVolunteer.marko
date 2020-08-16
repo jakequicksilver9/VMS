@@ -33,8 +33,9 @@
                     window.location.href="/manageVolunteers"
                 })
 
-         
-
+                $("#submit").click(function() {
+                    window.location.href="/manageVolunteers"
+                })
             });
 
             function validateForm() {
@@ -62,10 +63,17 @@
                 var addressPat = new RegExp("^[0-9]+\\s[A-Z||a-z||\\s||.]*\\s[0-9][0-9][0-9][0-9][0-9]\\s[A-Z||a-z]+$")
                 if (inputAddress && (!inputAddress.match(addressPat))){
                     alert("Incorrect Address, use format: house# street zip state")
+                    return false
+
                 }
 
                 if (inputEmergencyAddress && (!inputEmergencyAddress.match(addressPat))){
                     alert("Incorrect Emergency Address, use format: house# street zip state")
+                    return false
+
+                }
+                else{
+                    window.location.href="/manageVolunteers"
                 }
 
             }
