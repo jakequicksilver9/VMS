@@ -33,29 +33,32 @@
                     window.location.href="/manageVolunteers"
                 })
 
-                $("#submit").click(function() {
-                    window.location.href="/manageVolunteers"
-                })
+                // $("#submit").click(function() {
+                //     if(!validateForm()){
+                //         window.location.href="/manageVolunteers"
+                //     }
+                // })
             });
 
-            function validateForm() {
+            function validateForm(event) {
                 
                 var inputEmail = document.forms["addVolunteer"]["email"].value
                 var emailPat = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                 if (inputEmail && (!inputEmail.match(emailPat))) {
                     alert("Incorrect Email Format")
-                    return false
+
+                    return false;
                 }
                 var inputPhoneNumber = document.forms["addVolunteer"]["phoneNumber"].value
                 var inputemergencyPhoneNumber = document.forms["addVolunteer"]["emergencyPhoneNumber"].value
                 var phonePat = new RegExp("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")
                 if (inputPhoneNumber && (!inputPhoneNumber.match(phonePat))) {
                     alert("Incorrect Phone number Format")                    
-                    return false
+                    return false;
                 }
                 if (inputemergencyPhoneNumber && (!inputemergencyPhoneNumber.match(phonePat))) {
                     alert("Incorrect Emergency Phone number Format")                    
-                    return false
+                    return false;
                 }
 
                 var inputAddress = document.forms["addVolunteer"]["address"].value
@@ -63,17 +66,14 @@
                 var addressPat = new RegExp("^[0-9]+\\s[A-Z||a-z||\\s||.]*\\s[0-9][0-9][0-9][0-9][0-9]\\s[A-Z||a-z]+$")
                 if (inputAddress && (!inputAddress.match(addressPat))){
                     alert("Incorrect Address, use format: house# street zip state")
-                    return false
+                    return false;
 
                 }
 
                 if (inputEmergencyAddress && (!inputEmergencyAddress.match(addressPat))){
                     alert("Incorrect Emergency Address, use format: house# street zip state")
-                    return false
+                    return false;
 
-                }
-                else{
-                    window.location.href="/manageVolunteers"
                 }
 
             }
@@ -84,7 +84,8 @@
         <h1>${input.greeting}</h1>
         <h1>Add Volunteer</h1>
 
-        <form action="/addVolunteer" method="post" name = "addVolunteer" >
+        <!-- <form action="/addVolunteer" method="post" name = "addVolunteer" onclick="validateForm()"> -->
+        <form action="/addVolunteer" method="post" name = "addVolunteer" onsubmit="return validateForm()">
             <label for="first">First name: </label>
             <input type="text" id="first" name="firstname"><br><br>
             
