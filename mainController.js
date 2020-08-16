@@ -42,23 +42,13 @@ const mainController = (router, views) => {
     router.get('/manageVolunteers',(request,response)  => {
         if(request.session.user) {
             async function runme() {
-                const { Pool, Client } = require("pg");
-
-                const pool = new Pool({
-                    user: "postgres",
-                    host: "localhost",
-                    database: "postgres",
-                    password: "pass",
-                    port: "5432"
-                })
-                const client = await pool.connect()
+                const client = await database.pool.connect()
                 var queryString = 'SELECT * FROM volunteer'
                 console.log(queryString)
                 const result = await client.query({
                     text: queryString,
                     rowMode: 'array',
                 })
-                // var volunteers = database.getAllVolunteers()
                 var greeting = "Hello " + request.session.user.email
                 response.marko(manageVolunteers, { greeting: greeting , volunteers: result.rows})
             }
