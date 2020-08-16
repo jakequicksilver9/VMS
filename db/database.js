@@ -26,5 +26,18 @@ function addVolunteer(volunteer){
     )
 }
 
+function deleteVolunteer(id){
 
-module.exports = {addVolunteer, pool}
+  var queryString = 'DELETE FROM volunteer WHERE id =' + id + ';'
+  console.log(queryString)
+    pool.query(
+      queryString,
+      (err, res) => {
+        console.log(err, res);
+      }
+    )
+}
+
+
+
+module.exports = {addVolunteer, pool, deleteVolunteer}

@@ -79,6 +79,11 @@ const mainController = (router, views) => {
         response.end('done') 
     })
 
+    router.post('/deleteVolunteer',(request,response) => {
+        database.deleteVolunteer(request.body.id)
+        response.end('done') 
+    })
+
     router.get('/manageOpportunities',(request,response) => {
         if(request.session.user) {
             var greeting = "Hello " + request.session.user.email
