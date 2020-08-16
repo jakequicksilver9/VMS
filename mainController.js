@@ -1,5 +1,7 @@
-
+const volunteer = require("./classes/volunteer")
+const database = require("./db/database")
 const user = require("./classes/user");
+
 const mainController = (router, views) => {
     //define routes
     var index = require(views + 'index')
@@ -37,10 +39,30 @@ const mainController = (router, views) => {
         }
     })
 
-    router.get('/manageVolunteers',(request,response) => {
+    router.get('/manageVolunteers',(request,response)  => {
         if(request.session.user) {
-            var greeting = "Hello " + request.session.user.email
-            response.marko(manageVolunteers, { greeting: greeting })
+            async function runme() {
+                const { Pool, Client } = require("pg");
+
+                const pool = new Pool({
+                    user: "postgres",
+                    host: "localhost",
+                    database: "postgres",
+                    password: "pass",
+                    port: "5432"
+                })
+                const client = await pool.connect()
+                var queryString = 'SELECT * FROM volunteer'
+                console.log(queryString)
+                const result = await client.query({
+                    text: queryString,
+                    rowMode: 'array',
+                })
+                // var volunteers = database.getAllVolunteers()
+                var greeting = "Hello " + request.session.user.email
+                response.marko(manageVolunteers, { greeting: greeting , volunteers: result.rows})
+            }
+            runme()
         }
         else {
             response.write('<h1>Please login first.</h1>')
@@ -62,7 +84,7 @@ const mainController = (router, views) => {
     })
 
     router.post('/addVolunteer',(request,response) => {
-        volunteerObj = new volunteer.Volunteer('joe', 'dirt', 'joedirt69', 'password', [1,5,4], 'whoopin ass', '9-5 babty', '112 my address', '904111222333', 'joeDirt@comcast.net', 'educat', 'lisc', 'bobby bob','904333222111', 'emerg@email', 'emerg address', 'true', 'true')
+        volunteerObj = new volunteer.Volunteer(request.body.firstname, request.body.lastname, request.body.username, request.body.password, request.body.centers, request.body.skills, request.body.availability, request.body.address, request.body.phone, request.body.email, request.body.education, request.body.licenses, request.body.emergencyname,request.body.emergencyphone, request.body.emergencyemail, request.body.emergencyaddress, request.body.dlfile, request.body.ssfile, request.body.approval)
         database.addVolunteer(volunteerObj)
         response.end('done') 
     })
@@ -100,4 +122,4 @@ const mainController = (router, views) => {
     })
     return router
 }
-exports.mainController = mainController 
+exports.mainController = mainController

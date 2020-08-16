@@ -1,4 +1,5 @@
-const { Pool, Client } = require("pg")
+const { Pool, Client } = require("pg");
+const { mainController } = require("../mainController");
 
 const pool = new Pool({
   user: "postgres",
@@ -8,6 +9,7 @@ const pool = new Pool({
   port: "5432"
 })
 
+var glob = ""
 
 // function addVolunteer(firstname, lastname, username, password, centers, skills, availablilty, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile){
 
@@ -32,18 +34,30 @@ function addVolunteer(volunteer){
   var valuesString = volunteer.valuesOnly()
 
   var queryString = `INSERT INTO volunteer(
-    firstname, lastname, username, password, centers, skills, availability, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile
+    firstname, lastname, username, password, centers, skills, availability, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile, approval
     ) VALUES(` +valuesString+ `)`;
-console.log(queryString)
-  pool.query(
-    queryString,
-    (err, res) => {
-      console.log(err, res);
-    }
-  )
+  console.log(queryString)
+    pool.query(
+      queryString,
+      (err, res) => {
+        console.log(err, res);
+      }
+    )
 }
 
-module.exports = {addVolunteer}
+async function getAllVolunteers(){
+  const client = await pool.connect()
+  var queryString = 'SELECT * FROM volunteer'
+  console.log(queryString)
+  const result = await client.query({
+    text: queryString,
+    rowMode: 'array',
+  })
+// await client.end()
+  return result.rows
+}
+
+module.exports = {addVolunteer, getAllVolunteers, glob}
 
 // pool.query(
 //   "INSERT INTO student(firstname, lastname, age, address, email)VALUES('Mary Ann', 'Wilters', 20, '74 S Westgate St', 'mroyster@royster.com')",

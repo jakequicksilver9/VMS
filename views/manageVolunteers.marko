@@ -5,6 +5,10 @@
         <script src="/js/jquery.js"></script>
         <script>
             $(document).ready(function(){
+
+                var volunteers = ${input.volunteers}
+                debugger
+
                 $.ajax({
                     url: '/manageVolunteers',
                     complete: function(data) {
@@ -36,6 +40,8 @@
         </script>
     </head>
     <body>
+        
+        <h1> ${input.volunteers} </h1>
         <h1>${input.greeting}</h1>
         <h1>Volunteers to manage</h1>
         <input type="button" value="Add Volunteer" id="addVolunteer">

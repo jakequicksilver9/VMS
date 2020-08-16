@@ -1,5 +1,5 @@
 class Volunteer {
-    constructor(firstname, lastname, username, password, centers, skills, availablilty, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile) {
+    constructor(firstname, lastname, username, password, centers, skills, availablilty, address, phone, email, education, licenses, emergencyname, emergencyphone, emergencyemail, emergencyaddress, dlfile, ssfile, approval) {
       this.firstname = firstname;
       this.lastname = lastname;
       this.username = username;
@@ -18,6 +18,7 @@ class Volunteer {
       this.emergencyaddress = emergencyaddress;
       this.dlfile = dlfile;
       this.ssfile = ssfile;
+      this.approval = approval;
     }
     valuesOnly(){
        
@@ -38,7 +39,8 @@ class Volunteer {
       '\'' + this.emergencyemail + '\',' +
       '\'' + this.emergencyaddress + '\',' +
       '\'' + this.dlfile + '\',' +
-      '\'' + this.ssfile + '\'';
+      '\'' + this.ssfile + '\',' + 
+      '\'' + this.approval + '\'';
       return returnStr;
     }
 }

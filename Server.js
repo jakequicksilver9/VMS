@@ -16,7 +16,8 @@ app.set('views', __dirname + '/views')
 app.use(markoExpress())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: true   
+    
 }))
 app.use(session({
     secret: 'ssshhhhh',
@@ -27,6 +28,8 @@ app.use(session({
 }))
 app.use('/js', [
     express.static(__dirname + '/node_modules/jquery/dist/'),
+    express.static(__dirname + '/node_modules/bootstrap/dist/'),
+
 ])
 
 const router = mainController.mainController(express.Router(), views)
