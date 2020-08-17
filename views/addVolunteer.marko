@@ -25,15 +25,9 @@
                     window.location.href="/manageVolunteers"
                 })
 
-                // $("#submit").click(function() {
-                //     if(!validateForm()){
-                //         window.location.href="/manageVolunteers"
-                //     }
-                // })
             });
 
             function validateForm(event) {
-                
                 var inputEmail = document.forms["addVolunteer"]["email"].value
                 var emailPat = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
                 if (inputEmail && (!inputEmail.match(emailPat))) {
@@ -52,32 +46,26 @@
                     alert("Incorrect Emergency Phone number Format")                    
                     return false;
                 }
-
                 var inputAddress = document.forms["addVolunteer"]["address"].value
                 var inputEmergencyAddress = document.forms["addVolunteer"]["emergencyAddress"].value
                 var addressPat = new RegExp("^[0-9]+\\s[A-Z||a-z||\\s||.]*\\s[0-9][0-9][0-9][0-9][0-9]\\s[A-Z||a-z]+$")
                 if (inputAddress && (!inputAddress.match(addressPat))){
                     alert("Incorrect Address, use format: house# street zip state")
                     return false;
-
                 }
-
                 if (inputEmergencyAddress && (!inputEmergencyAddress.match(addressPat))){
                     alert("Incorrect Emergency Address, use format: house# street zip state")
                     return false;
-
                 }
-
             }
-
             </script>
     </head>
     <body>
         <h1>${input.greeting}</h1>
         <h1>Add Volunteer</h1>
 
-        <!-- <form action="/addVolunteer" method="post" name = "addVolunteer" onclick="validateForm()"> -->
-        <form action="/addVolunteer" method="post" name = "addVolunteer" onsubmit="return validateForm()">
+        <!-- <form action="/addVolunteer" method="post" name = "addVolunteer" onsubmit="return validateForm()"> -->
+        <form action="/addVolunteer" method="post" name = "addVolunteer">
             <label for="first">First name: </label>
             <input type="text" id="first" name="firstname"><br><br>
             
@@ -165,7 +153,6 @@
                 </div>
             </div>
         </form>
-
 
         <input type="button" value="Cancel" id="cancel">
         <input type="button" value="log out" id="logOut" onclick("logOut")>

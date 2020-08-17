@@ -11,29 +11,24 @@
                 for (var x = 0; x < volunteers.length; x++){
                     $("#tableBody").append('<tr> <td>' + volunteers[x][0] + '</td> <td>' + volunteers[x][1] + '</td> <td>' + volunteers[x][2] + '</td> <td>' + volunteers[x][3] + '</td> <td>' + '<button class="manage" onclick="manage(' + volunteers[x][0] + ', 0)"> Delete </button>' + '</td> <td>' + '<button class="manage" onclick="manage(' + volunteers[x][0] + ', 1)"> Edit </button>' + '</td> </tr>')
                 }
-                
                 var email,pass
                 $("#logOut").click(function(){
                   email="";
                   pass="";
-                  
                   $.post("/login",{email:email,pass:pass},function(data){
                       if(data==='done') {
                           window.location.href="/logout"
                       }
                   })
                 })
-            
                 $("#addVolunteer").click(function() {
                 window.location.href="/addVolunteer"
                 })
-
                 $("#manage").click(function() {
                 window.location.href="/admin"
                 })
 
-                
-
+            
             });
             function manage(id, option) {
                     if (option == 0){
@@ -64,7 +59,7 @@
 
             </thead>
             <tbody id="tableBody">
-            
+
             </tbody>
         </table>
         <input type="button" value="Add Volunteer" id="addVolunteer">
