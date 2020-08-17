@@ -9,16 +9,9 @@
         <link rel="stylesheet" src="/js/css/bootstrap.css">
         <script>
             $(document).ready(function(){
-                $.ajax({
-                    url: '/editVolunteer',
-                    complete: function(data) {
-                      console.log(data);
-                    }
-                  })
-                
                 
                 var email,pass
-              $ ("#logOut").click(function(){
+                $ ("#logOut").click(function(){
                     email="";
                     pass="";
                   
@@ -84,7 +77,7 @@
         <h1>${input.greeting}</h1>
         <h1>Add Volunteer</h1>
 
-        <form action="/addVolunteer" method="post" name = "addVolunteer" >
+        <form action="/editVolunteer" method="post" name = "editVolunteer" >
             <label for="first">First name: </label>
             <input type="text" id="first" name="firstname"><br><br>
             
