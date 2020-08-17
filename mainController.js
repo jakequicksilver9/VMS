@@ -19,8 +19,7 @@ const mainController = (router, views) => {
         if(sess.user) {
             return response.redirect('/admin')
         }
-        var test = "test123"
-        response.marko(index, {myString: "test123"})
+        response.marko(index)
     })
 
     router.post('/login',(request,response) => {

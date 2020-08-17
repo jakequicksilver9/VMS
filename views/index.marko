@@ -20,13 +20,6 @@ class {
         <script src="/js/jquery.js"></script>
         <script>
         $(document).ready(function(){
-            $.ajax({
-                    url: '/index',
-                    complete: function(data) {
-                      console.log(data);
-                    }
-                  });
-
 
             var email,pass
             $("#submit").click(function(){
@@ -46,10 +39,10 @@ class {
         </script>
     </head>
     <body>
-        <input id="email" type="email" name=input.name />
-        <input type="password" size="40" placeholder="Type your password" id="password"><br />
-
-        <span>${input.myString}</span>
-        <input type="submit" value="Submit" id="submit" onclick("handleChange")>
+        <form>
+            <input id="email" type="email" name=input.name />
+            <input type="password" size="40" placeholder="Type your password" id="password"><br />
+            <input type="submit" value="Submit" id="submit" onclick("handleChange")>
+        </form>
     </body>
 </html>

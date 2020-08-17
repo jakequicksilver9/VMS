@@ -12,13 +12,6 @@
                     $("#tableBody").append('<tr> <td>' + volunteers[x][0] + '</td> <td>' + volunteers[x][1] + '</td> <td>' + volunteers[x][2] + '</td> <td>' + volunteers[x][3] + '</td> <td>' + '<button class="manage" onclick="manage(' + volunteers[x][0] + ', 0)"> Delete </button>' + '</td> </tr>')
                 }
                 
-                $.ajax({
-                    url: '/manageVolunteers',
-                    complete: function(data) {
-                      console.log(data);
-                    }
-                  });
-                
                 var email,pass
                 $("#logOut").click(function(){
                   email="";

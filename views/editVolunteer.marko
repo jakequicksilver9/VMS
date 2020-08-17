@@ -9,6 +9,14 @@
         <link rel="stylesheet" src="/js/css/bootstrap.css">
         <script>
             $(document).ready(function(){
+                $.ajax({
+                    url: '/editVolunteer',
+                    complete: function(data) {
+                      console.log(data);
+                    }
+                  })
+                
+                
                 var email,pass
               $ ("#logOut").click(function(){
                     email="";
