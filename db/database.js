@@ -49,6 +49,24 @@ async function editVolunteer(volunteer, id){
     ssfile = '` +  volunteer.ssfile + `',
     approval = '` +  volunteer.approval + `'
     WHERE ID = ` + id + ';';
+    console.log(queryString)
+    client.query(
+      queryString,
+      (err, res) => {
+        console.log(err, res);
+      }
+    )
+    client.release()
+}
+
+async function addOpportunity(opportunity){
+  // var valuesArray = volunteer.valuesOnly()
+  console.log(opportunity.valuesOnly())
+  var valuesString = opportunity.valuesOnly()
+  const client = await pool.connect()
+  var queryString = `INSERT INTO opportunity(
+    name, email, address, phonenumber
+    ) VALUES(` +valuesString+ `)`;
   console.log(queryString)
     client.query(
       queryString,
@@ -72,4 +90,5 @@ async function deleteVolunteer(id){
   client.release()
 }
 
-module.exports = {pool, addVolunteer, deleteVolunteer, editVolunteer}
+module.exports = {pool, addVolunteer, deleteVolunteer, editVolunteer, addOpportunity}
+

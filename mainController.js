@@ -1,4 +1,5 @@
 const volunteer = require("./classes/volunteer")
+const opportunity = require("./classes/opportunity")
 const database = require("./db/database")
 const user = require("./classes/user");
 const { pool } = require("./db/database");
@@ -145,6 +146,16 @@ const mainController = (router, views) => {
             response.end('<a href='+'/'+'>Login</a>')
         }
         
+    })
+
+    router.post('/addOpportunity',(request,response) => {
+        opportunityObj = new opportunity.Opportunity(request.body.name, request.body.email, request.body.address, request.body.phonenumber)
+        async function runme() {
+            await database.addOpportunity(opportunityObj)
+        }
+        runme()
+        response.redirect('/manageOpportunities')
+        // response.end('done') 
     })
 
     router.get('/logout',(request,response) => {
