@@ -14,13 +14,13 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Add Opportunitys</title><script src=/js/jquery.js></script><script>\n            $(document).ready(function(){\n                \n              var email,pass\n              $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n              })\n\n              $(\"#cancel\").click(function() {\n                window.location.href=\"/manageOpportunities\"\n                })\n\n            });\n\n            </script></head><body><h1>" +
+  out.w("<!DOCTYPE html><html xmlns:th=http://www.thymeleaf.org lang=en><head><title>Add Opportunitys</title><link rel=stylesheet type=text/css href=/js/datatables.min.css><link rel=stylesheet type=text/css href=/js/bootstrap.min.css><script type=text/javascript src=/js/jquery.min.js></script><script type=text/javascript src=/js/datatables.min.js></script><script type=text/javascript src=/js/bootstrap.min.js></script> <script>\n            $(document).ready(function(){\n                \n              var email,pass\n              $(\"#logOut\").click(function(){\n                  email=\"\";\n                  pass=\"\";\n                  \n                  $.post(\"/login\",{email:email,pass:pass},function(data){\n                      if(data==='done') {\n                          window.location.href=\"/logout\"\n                      }\n                  })\n              })\n\n              $(\"#cancel\").click(function() {\n                window.location.href=\"/manageOpportunities\"\n                })\n\n            });\n\n            </script></head><body><h1>" +
     marko_escapeXml(input.greeting) +
     "</h1><h1>Opportunitys to add</h1><form action><label for=first>First name:</label><input type=text id=first name=firstName><br><br><input type=submit value=Submit></form><input type=button value=Cancel id=cancel><input type=button value=\"log out\" id=logOut onclick(\"logOut\")>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "14");
+  await_reorderer_tag({}, out, __component, "16");
 
   _preferred_script_location_tag({}, out);
 

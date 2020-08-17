@@ -4,9 +4,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <title>Edit Volunteers</title>
-        <script src="/js/jquery.js"></script>
-        <script src="/js/js/bootstrap.js"></script>
-        <link rel="stylesheet" src="/js/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/js/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/js/bootstrap.min.css"/>
+
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/datatables.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function(){
                 setOption(document.getElementsByName('dlfile')[0], '${input.volunteer.dlfile}')
@@ -89,7 +92,7 @@
         <h1>${input.greeting}</h1>
         <h1>Edit Volunteer</h1>
 
-        <form action="/editVolunteer/${input.id}" method="post" name = "editVolunteer" >
+        <form action="/editVolunteer/${input.id}" method="post" name = "editVolunteer">
             <label for="first">First name: </label>
             <input type="text" id="first" name="firstname" value="${input.volunteer.firstname}"><br><br>
             
