@@ -11,6 +11,7 @@ const mainController = (router, views) => {
     var addVolunteer = require(views + 'addVolunteer')
     var manageOpportunities = require(views + 'manageOpportunities')
     var addOpportunity = require(views + 'addOpportunity')
+    var editVolunteer = require(views + 'editVolunteer')
 
 
     //controllers
@@ -75,13 +76,45 @@ const mainController = (router, views) => {
     })
 
     router.post('/addVolunteer',(request,response) => {
-        volunteerObj = new volunteer.Volunteer(request.body.firstname, request.body.lastname, request.body.username, request.body.password, request.body.centers, request.body.skills, request.body.availability, request.body.address, request.body.phone, request.body.email, request.body.education, request.body.licenses, request.body.emergencyname,request.body.emergencyphone, request.body.emergencyemail, request.body.emergencyaddress, request.body.dlfile, request.body.ssfile, request.body.approval)
+        volunteerObj = volunteer.requestToObject(request)
         async function runme() {
             await database.addVolunteer(volunteerObj)
         }
         runme()
         response.redirect('/manageVolunteers')
-        // response.end('done') 
+    })
+
+    router.get('/editVolunteer/:volunteerId',(request,response) => {
+        if(request.session.user) {
+            async function runme() {
+                const client = await database.pool.connect()
+                var queryString = 'SELECT * FROM volunteer WHERE id =' + parseInt(request.params.volunteerId)
+                console.log(queryString)
+                const result = await client.query({
+                    text: queryString,
+                    rowMode: 'array',
+                })
+                client.release()
+                var greeting = "Hello " + request.session.user.email
+                var volunteerObj = volunteer.arrayToObject(result.rows[0])
+                response.marko(editVolunteer, { greeting: greeting , volunteer: volunteerObj, id: result.rows[0][0]})
+            }
+            runme()
+        }
+        else {
+            response.write('<h1>Please login first.</h1>')
+            response.end('<a href='+'/'+'>Login</a>')
+        }
+        
+    })
+
+    router.post('/editVolunteer/:volunteerId',(request,response) => {
+        volunteerObj = volunteer.requestToObject(request)
+        async function runme() {
+            await database.editVolunteer(volunteerObj, request.params.volunteerId)
+        }
+        runme()
+        response.redirect('/manageVolunteers')
     })
 
     router.post('/deleteVolunteer',(request,response) => {

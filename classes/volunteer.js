@@ -20,9 +20,10 @@ class Volunteer {
       this.ssfile = ssfile;
       this.approval = approval;
     }
+
     valuesOnly(){
-       
-      var returnStr = '\'' + this.firstname + '\',' +
+      var returnStr = 
+      '\'' + this.firstname + '\',' +
       '\'' + this.lastname + '\',' +
       '\'' + this.username + '\',' +
       '\'' + this.password + '\',' +
@@ -43,6 +44,17 @@ class Volunteer {
       '\'' + this.approval + '\'';
       return returnStr;
     }
+
 }
 
-module.exports.Volunteer = Volunteer;
+function arrayToObject(arr) {
+  var obj = new Volunteer(arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7],arr[8],arr[9],arr[10],arr[11],arr[12],arr[13],arr[14],arr[15],arr[16],arr[17],arr[18],arr[19])
+  return obj;
+}
+
+function requestToObject(request) {
+  var obj = new Volunteer(request.body.firstname, request.body.lastname, request.body.username, request.body.password, request.body.centers, request.body.skills, request.body.availability, request.body.address, request.body.phone, request.body.email, request.body.education, request.body.licenses, request.body.emergencyname,request.body.emergencyphone, request.body.emergencyemail, request.body.emergencyaddress, request.body.dlfile, request.body.ssfile, request.body.approval)
+  return obj;
+}
+
+module.exports = {Volunteer,arrayToObject, requestToObject}

@@ -10,7 +10,6 @@ const pool = new Pool({
 })
 
 async function addVolunteer(volunteer){
-  // var valuesArray = volunteer.valuesOnly()
   console.log(volunteer.valuesOnly())
   var valuesString = volunteer.valuesOnly()
   const client = await pool.connect()
@@ -27,8 +26,40 @@ async function addVolunteer(volunteer){
     client.release()
 }
 
-async function deleteVolunteer(id){
+async function editVolunteer(volunteer, id){
+  const client = await pool.connect()
+  var queryString = `UPDATE volunteer SET
+    firstname = '` +  volunteer.firstname + `',
+    lastname = '` +  volunteer.lastname + `',
+    username = '` +  volunteer.username + `',
+    password = '` +  volunteer.password + `',
+    centers = '{` +  volunteer.centers + `}',
+    skills = '` +  volunteer.skills + `',
+    availability = '` +  volunteer.availablilty + `',
+    address = '` +  volunteer.address + `',
+    phone = '` +  volunteer.phone + `',
+    email = '` +  volunteer.email + `',
+    education = '` +  volunteer.education + `',
+    licenses = '` +  volunteer.licenses + `',
+    emergencyname = '` +  volunteer.emergencyname + `',
+    emergencyphone = '` +  volunteer.emergencyphone + `',
+    emergencyemail = '` +  volunteer.emergencyemail + `',
+    emergencyaddress = '` +  volunteer.emergencyaddress + `',
+    dlfile = '` +  volunteer.dlfile + `',
+    ssfile = '` +  volunteer.ssfile + `',
+    approval = '` +  volunteer.approval + `'
+    WHERE ID = ` + id + ';';
+  console.log(queryString)
+    client.query(
+      queryString,
+      (err, res) => {
+        console.log(err, res);
+      }
+    )
+    client.release()
+}
 
+async function deleteVolunteer(id){
   var queryString = 'DELETE FROM volunteer WHERE id =' + id + ';'
   console.log(queryString)
   const client = await pool.connect()
@@ -39,9 +70,6 @@ async function deleteVolunteer(id){
     }
   )
   client.release()
-    
 }
 
-
-
-module.exports = {addVolunteer, pool, deleteVolunteer}
+module.exports = {pool, addVolunteer, deleteVolunteer, editVolunteer}

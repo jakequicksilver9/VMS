@@ -9,7 +9,7 @@
                 var volunteers = ${input.volunteers}
                 var tableData = ''
                 for (var x = 0; x < volunteers.length; x++){
-                    $("#tableBody").append('<tr> <td>' + volunteers[x][0] + '</td> <td>' + volunteers[x][1] + '</td> <td>' + volunteers[x][2] + '</td> <td>' + volunteers[x][3] + '</td> <td>' + '<button class="manage" onclick="manage(' + volunteers[x][0] + ', 0)"> Delete </button>' + '</td> </tr>')
+                    $("#tableBody").append('<tr> <td>' + volunteers[x][0] + '</td> <td>' + volunteers[x][1] + '</td> <td>' + volunteers[x][2] + '</td> <td>' + volunteers[x][3] + '</td> <td>' + '<button class="manage" onclick="manage(' + volunteers[x][0] + ', 0)"> Delete </button>' + '</td> <td>' + '<button class="manage" onclick="manage(' + volunteers[x][0] + ', 1)"> Edit </button>' + '</td> </tr>')
                 }
                 
                 var email,pass
@@ -38,10 +38,13 @@
             function manage(id, option) {
                     if (option == 0){
                         $.post("/deleteVolunteer",{id:id},function(data){
-                      if(data==='done') {
-                          window.location.href="/manageVolunteers"
-                      }
-                  })
+                            if(data==='done') {
+                                window.location.href="/manageVolunteers"
+                            }
+                        })
+                    }
+                    if (option == 1){
+                        window.location.href="/editVolunteer/" + id
                     }
                 }
         </script>
@@ -57,6 +60,8 @@
                 <th>last name</th>
                 <th>user name</th>
                 <th>delete</th>
+                <th>edit</th>
+
             </thead>
             <tbody id="tableBody">
             
