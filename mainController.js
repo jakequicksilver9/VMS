@@ -13,6 +13,7 @@ const mainController = (router, views) => {
     var manageOpportunities = require(views + 'manageOpportunities')
     var addOpportunity = require(views + 'addOpportunity')
     var editVolunteer = require(views + 'editVolunteer')
+    var editOpportunity = require(views + 'editOpportunity')
 
 
     //controllers
@@ -109,6 +110,30 @@ const mainController = (router, views) => {
         
     })
 
+    router.get('/editOpportunity/:opportunityId',(request,response) => {
+        if(request.session.user) {
+            async function runme() {
+                const client = await database.pool.connect()
+                var queryString = 'SELECT * FROM opportunity WHERE id =' + parseInt(request.params.opportunityId)
+                console.log(queryString)
+                const result = await client.query({
+                    text: queryString,
+                    rowMode: 'array',
+                })
+                client.release()
+                var greeting = "Hello " + request.session.user.email
+                var opportunityObj = opportunity.arrayToObject(result.rows[0])
+                response.marko(editOpportunity, { greeting: greeting , opportunity: opportunityObj, id: result.rows[0][0]})
+            }
+            runme()
+        }
+        else {
+            response.write('<h1>Please login first.</h1>')
+            response.end('<a href='+'/'+'>Login</a>')
+        }
+        
+    })
+
     router.post('/editVolunteer/:volunteerId',(request,response) => {
         volunteerObj = volunteer.requestToObject(request)
         async function runme() {
@@ -116,6 +141,16 @@ const mainController = (router, views) => {
         }
         runme()
         response.redirect('/manageVolunteers')
+    })
+
+    
+    router.post('/editOpportunity/:opportunityId',(request,response) => {
+        opportunityObj = opportunity.requestToObject(request)
+        async function runme() {
+            await database.editOpportunity(opportunityObj, request.params.opportunityId)
+        }
+        runme()
+        response.redirect('/manageOpportunities')
     })
 
     router.post('/deleteVolunteer',(request,response) => {
@@ -126,10 +161,31 @@ const mainController = (router, views) => {
         response.end('done') 
     })
 
+    router.post('/deleteOpportunity',(request,response) => {
+        async function runme() {
+            await database.deleteOpportunity(request.body.id)
+        }
+        runme()
+        response.end('done') 
+    })
+
     router.get('/manageOpportunities',(request,response) => {
         if(request.session.user) {
-            var greeting = "Hello " + request.session.user.email
-            response.marko(manageOpportunities, { greeting: greeting })
+            async function runme() {
+                const client = await database.pool.connect()
+                var queryString = 'SELECT * FROM opportunity'
+                console.log(queryString)
+                const result = await client.query({
+                    text: queryString,
+                    rowMode: 'array',
+                })
+                client.release()
+                var greeting = "Hello " + request.session.user.email
+                response.marko(manageOpportunities, { greeting: greeting , opportunities: JSON.stringify(result.rows)})
+                
+                
+            }
+            runme()
         }
         else {
             response.write('<h1>Please login first.</h1>')
