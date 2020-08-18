@@ -89,12 +89,16 @@
             </script>
     </head>
     <body>
-        <h1>${input.greeting}</h1>
-        <h1>Edit Volunteer</h1>
+        <div class="navbar">
+            <h1>${input.greeting}</h1>
+            <input type="button" value="log out" id="logOut" onclick("logOut")>
+        </div>
 
         <form action="/editVolunteer/${input.id}" method="post" name = "editVolunteer">
             <div class="row justify-content-center">
                 <div class="col-6">
+                    <h2 style="padding-left: 0;">Edit Volunteer</h2>
+
                     <div class="form-group">
                         <div class="row">
                             <label class="form-label" for="first">First name: </label>
@@ -245,8 +249,5 @@
                 </div>
             </div>
         </form>
-
-        <input type="button" value="log out" id="logOut" onclick("logOut")>
-
     </body>
 </html>

@@ -54,10 +54,14 @@
     </head>
     <body>
         
-        <h1>${input.greeting}</h1>
-        <h1>Volunteers to manage</h1>
+        <div class="navbar">
+            <h1>${input.greeting}</h1>
+            <input type="button" value="log out" id="logOut" onclick("logOut")>
+        </div>
         <div class="row justify-content-center">
             <div class="col-8">
+                <h2 style="padding-left: 0;">Volunteers to manage</h2>
+
                 <table id="table">
                     <thead>
                         <th>id</th>
@@ -70,9 +74,15 @@
                     <tbody id="tableBody">
                     </tbody>
                 </table>
-                <input type="button" value="Add Volunteer" id="addVolunteer">
-                <input type="button" value="Manage" id="manage">
-                <input type="button" value="log out" id="logOut">
+
+                <div class="row">
+                    <div class="col-3" style="padding-left: 0;">
+                        <input type="button" value="Add Volunteer" id="addVolunteer">
+                    </div>
+                    <div class="col-3" style="padding-left: 0;">
+                        <input type="button" value="Manage" id="manage">
+                    </div>
+                </div>
             </div>
         </div>
     </body>

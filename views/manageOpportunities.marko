@@ -57,27 +57,39 @@
             </script>
     </head>
     <body>
-        <h1>${input.greeting}</h1>
-        <h1>Opportunities to manage</h1>
-        <table id="table">
-            <thead>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-                <th>delete</th>
-                <th>edit</th>
-                
+        <div class="navbar">
+            <h1>${input.greeting}</h1>
+            <input type="button" value="log out" id="logOut" onclick("logOut")>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2 style="padding-left: 0;">Opportunities to manage</h2>
+                <table id="table">
+                    <thead>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
+                        <th>delete</th>
+                        <th>edit</th>
+                        
 
-            </thead>
-            <tbody id="tableBody">
-            </tbody>
-        </table>
-        <input type="button" value="Add Opportunity" id="addOpportunity">
-        <input type="button" value="Manage" id="manage">
-        <input type="button" value="log out" id="logOut" onclick("logOut")>
-
-
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3" style="padding-left: 0;">
+                            <input type="button" value="Add Opportunity" id="addOpportunity">
+                        </div>
+                        <div class="col-3" style="padding-left: 0;">
+                            <input type="button" value="Manage" id="manage">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

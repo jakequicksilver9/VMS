@@ -38,14 +38,23 @@
             </script>
     </head>
     <body>
-        <h1>${input.greeting}</h1>
-        <h1>What would you like to manage</h1>
+        <div class="navbar">
+            <h1>${input.greeting}</h1>
+            <input type="button" value="log out" id="logOut" onclick("logOut")>
+        </div>
 
-        <button id = "manageVolunteers">Manage Volunteers</button>
-        <button id = "manageOpportunities">Manage Opportunities</button>
-
-        <input type="button" value="log out" id="logOut" onclick("logOut")>
-
-
+        <div class="row justify-content-center">
+            
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4" style="padding-left: 0;">
+                        <button id = "manageVolunteers">Manage Volunteers</button>
+                    </div>
+                    <div class="col-4" style="padding-left: 0;">
+                        <button id = "manageOpportunities">Manage Opportunities</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
