@@ -14,7 +14,11 @@
         
         <script>
             $(document).ready(function(){
-                
+                var opportunities = ${input.opportunities}
+                var tableData = ''
+                for (var x = 0; x < opportunities.length; x++){
+                    $("#tableBody").append('<tr> <td>' + opportunities[x][0] + '</td> <td>' + opportunities[x][1] + '</td> <td>' + opportunities[x][2] + '</td> <td>' + opportunities[x][3] + '</td> <td>' + opportunities[x][4] + '</td> <td>' + '<button class="manage" onclick="manage(' + opportunities[x][0] + ', 0)"> Delete </button>' + '</td> <td>' + '<button class="manage" onclick="manage(' + opportunities[x][0] + ', 1)"> Edit </button>' + '</td> </tr>')
+                }
             var email,pass
             $("#logOut").click(function(){
                   email="";
@@ -26,23 +30,48 @@
                       }
                   })
             })
-
             $("#addOpportunity").click(function() {
                 window.location.href="/addOpportunity"
             })
-
             $("#manage").click(function() {
                 window.location.href="/admin"
                 })
                 
             });
 
+            function manage(id, option) {
+                    if (option == 0){
+                        $.post("/deleteOpportunity",{id:id},function(data){
+                            if(data==='done') {
+                                window.location.href="/manageOpportunities"
+                            }
+                        })
+                    }
+                    if (option == 1){
+                        window.location.href="/editOpportunity/" + id
+                    }
+                }
+
             </script>
     </head>
     <body>
         <h1>${input.greeting}</h1>
         <h1>Opportunities to manage</h1>
+        <table>
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>delete</th>
+                <th>edit</th>
+                
 
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
         <input type="button" value="Add Opportunity" id="addOpportunity">
         <input type="button" value="Manage" id="manage">
         <input type="button" value="log out" id="logOut" onclick("logOut")>

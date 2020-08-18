@@ -1,5 +1,6 @@
 const { Pool, Client } = require("pg");
 const { mainController } = require("../mainController");
+const opportunity = require("../classes/opportunity");
 
 const pool = new Pool({
   user: "postgres",
@@ -59,6 +60,24 @@ async function editVolunteer(volunteer, id){
     client.release()
 }
 
+async function editOpportunity(opportunity, id){
+  const client = await pool.connect()
+  var queryString = `UPDATE opportunity SET
+    name = '` +  opportunity.name + `',
+    address = '` +  opportunity.address + `',
+    phonenumber = '` +  opportunity.phonenumber + `',
+    email = '` +  opportunity.email + `'
+    WHERE ID = ` + id + ';';
+    console.log(queryString)
+    client.query(
+      queryString,
+      (err, res) => {
+        console.log(err, res);
+      }
+    )
+    client.release()
+}
+
 async function addOpportunity(opportunity){
   // var valuesArray = volunteer.valuesOnly()
   console.log(opportunity.valuesOnly())
@@ -77,6 +96,7 @@ async function addOpportunity(opportunity){
     client.release()
 }
 
+
 async function deleteVolunteer(id){
   var queryString = 'DELETE FROM volunteer WHERE id =' + id + ';'
   console.log(queryString)
@@ -90,5 +110,18 @@ async function deleteVolunteer(id){
   client.release()
 }
 
-module.exports = {pool, addVolunteer, deleteVolunteer, editVolunteer, addOpportunity}
+async function deleteOpportunity(id){
+  var queryString = 'DELETE FROM opportunity WHERE id =' + id + ';'
+  console.log(queryString)
+  const client = await pool.connect()
+  client.query(
+    queryString,
+    (err, res) => {
+      console.log(err, res);
+    }
+  )
+  client.release()
+}
+
+module.exports = {pool, addVolunteer, deleteVolunteer, editVolunteer, addOpportunity, deleteOpportunity, editOpportunity}
 

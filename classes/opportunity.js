@@ -15,4 +15,15 @@ class Opportunity {
     }
 }
 
-module.exports.Opportunity = Opportunity;
+function arrayToObject(arr) {
+  var obj = new Opportunity(arr[1],arr[2],arr[3],arr[4])
+  return obj;
+}
+
+function requestToObject(request) {
+  var obj = new Opportunity(request.body.name, request.body.email, request.body.address, request.body.phonenumber)
+  return obj;
+}
+
+// module.exports.Opportunity = Opportunity;
+module.exports = {Opportunity,arrayToObject, requestToObject}

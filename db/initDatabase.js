@@ -16,11 +16,3 @@ pool.query(
     pool.end();
   }
 )
-
-// pool.query(
-//   "CREATE TABLE opportunity(id SERIAL PRIMARY KEY, name TEXT, email TEXT, address TEXT, phone number int);",
-//   (err, res) => {
-//     console.log(err, res);
-//     pool.end();
-//   }
-// )
