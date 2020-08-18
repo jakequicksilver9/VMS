@@ -42,6 +42,8 @@ const mainController = (router, views) => {
         }
     })
 
+
+
     router.get('/manageVolunteers',(request,response)  => {
         if(request.session.user) {
             async function runme() {
@@ -66,9 +68,23 @@ const mainController = (router, views) => {
     })
 
     router.get('/addVolunteer',(request,response) => {
+        
         if(request.session.user) {
-            var greeting = "Hello " + request.session.user.email
-            response.marko(addVolunteer, { greeting: greeting })
+            async function runme() {
+                const client = await database.pool.connect()
+                var queryString = 'SELECT * FROM opportunity'
+                console.log(queryString)
+                const result = await client.query({
+                    text: queryString,
+                    rowMode: 'array',
+                })
+                client.release()
+                var greeting = "Hello " + request.session.user.email
+                response.marko(addVolunteer, { greeting: greeting , opportunities: JSON.stringify(result.rows)})
+                
+                
+            }
+            runme()
         }
         else {
             response.write('<h1>Please login first.</h1>')
