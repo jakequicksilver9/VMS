@@ -4,9 +4,9 @@ const opportunity = require("../classes/opportunity");
 
 const pool = new Pool({
   user: "postgres",
-  host: "localhost",
+  host: "database-2.cv34ux64nhtc.us-east-1.rds.amazonaws.com",
   database: "postgres",
-  password: "pass",
+  password: "password",
   port: "5432"
 })
 
