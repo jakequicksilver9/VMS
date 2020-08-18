@@ -35,8 +35,10 @@
             })
             $("#manage").click(function() {
                 window.location.href="/admin"
-                })
-                
+            })
+            
+            $("#table").DataTable()
+            
             });
 
             function manage(id, option) {
@@ -57,7 +59,7 @@
     <body>
         <h1>${input.greeting}</h1>
         <h1>Opportunities to manage</h1>
-        <table>
+        <table id="table">
             <thead>
                 <th>Id</th>
                 <th>Name</th>
